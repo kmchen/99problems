@@ -11,24 +11,23 @@ func rotate(matrix [][]int, n int) {
 	bound := n - 1
 	// Rotate row by row
 	for i := 0; i < n/2; i++ {
-		for j := i; j < bound; j++ {
-			top := matrix[i][j]
+		for j := 0; j < bound-i; j++ {
+			top := matrix[i][j+i]
 
 			// left -> top
-			matrix[i][j] = matrix[bound-j][i]
-			//matrix[1][1] = matrix[1][1]
+			matrix[i][j+i] = matrix[bound-j][i]
 
 			// bottom -> left
 			matrix[bound-j][i] = matrix[bound][bound-j]
 
 			// right -> bottom
-			matrix[bound][bound-j] = matrix[j-i][bound]
+			matrix[bound][bound-j] = matrix[j+i][bound]
 
+			// top -> right
 			matrix[i+j][bound] = top
-
-			fmt.Println(matrix)
 		}
 		fmt.Println()
+		//[[13 9 5 1] [14 6 7 2] [15 10 11 3] [16 12 8 4]]
 		bound--
 	}
 	for row := 0; row <= n-1; row++ {
